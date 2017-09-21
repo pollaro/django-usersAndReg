@@ -3,12 +3,13 @@ from django.db import models
 import re
 
 nameRegex = r'^\w{1,}'
-emailRegex = r'^\w+@\w+\.[a-zA-Z]{3}'
+emailRegex = r"^\w+@\w+\.[a-z]{3}"
 nameRegex = re.compile(nameRegex)
 emailRegex = re.compile(emailRegex)
 
 class UsersManager(models.Manager):
     def validator(self,postData):
+        print 'Validator'
         errors = {}
         if not nameRegex.match(postData['firstName']):
             errors['firstName'] = 'Please enter a valid first name'
@@ -20,6 +21,7 @@ class UsersManager(models.Manager):
             errors['password'] = 'Password must be at least 8 characters long'
         if postData['password'] != postData['confirmPW']:
             errors['confirmPW'] = 'Password and confirm password must match'
+        print errors
         return errors
 
 class Users(models.Model):

@@ -10,31 +10,22 @@
         <div id="regBox">
             <span class="title">Register:</span>
             <br>
-            <form action="/register" method="post">
+            <form action="/login/register" method="post">
                 {% csrf_token %}
-            {% if messages %}
-                {% for message in messages %}
-                    {% if 'firstName' in message.tags %}
-                        {{message.firstName}}
-                    {% endif %}
+                {% if messages %}
+                    <div class="errors">
+                    {% for message in messages %}
+                        {{message}}
+                        <br>
+                    {% endfor %}
+                    </div>
+                {% endif %}
                 First Name: <input type="text" name="firstName"><br>
-                    {% if 'lastName' in message.tags %}
-                        {{message.lastName}}
-                    {% endif %}
+
                 Last Name: <input type="text" name="lastName"><br>
-                    {% if 'email' in message.tags %}
-                        {{message.email}}
-                    {% endif %}
-                    {% if 'emailInUse' in message.tags %}
-                        {{message.emailInUse}}
-                    {% endif %}
+
                 Email: <input type="text" name="email"><br>
-                    {% if 'password' in message.tags %}
-                        {{message.password}}
-                    {% endif %}
-                    {% if 'confirmPW' in message.tags %}
-                        {{message.confirmPW}}
-                    {% endif %}
+
                 Password: <input type="password" name="password"><br>
 
                 Confirm Password: <input type="password" name="confirmPW"><br>
@@ -44,17 +35,20 @@
         <div id="loginBox">
             <span class="title">Login:</span>
             <br>
-            <form action="/login" method="post">
+            <form action="/login/login" method="post">
                 {% csrf_token %}
-                {% if 'login' in message.tags %}
-                        {{message.login}}
-                {% endif %}
+            {% if messages %}
+                <div class="errors">
+                {% for message in messages %}
+                            {{message}}
+                            <br>
+                {% endfor %}
+                </div>
+            {% endif %}
                 Email: <input type="text" name="email"><br>
                 Password: <input type="password" name="password"><br>
                 <input type="submit" name="submitLog" value="Log In">
             </form>
-            {% endfor %}
-        {% endif %}
         </div>
     </body>
 </html>

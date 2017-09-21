@@ -25,3 +25,7 @@ input{
     font-weight: bold;
     font-size: 16pt;
 }
+
+.errors{
+    color: red;
+}
